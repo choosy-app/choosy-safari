@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		8D5B49B0048680CD000E48DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
 		8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
+		C6D19A2E0EF807F9002B78B1 /* ChoosySafari.m in Sources */ = {isa = PBXBuildFile; fileRef = C6D19A2D0EF807F9002B78B1 /* ChoosySafari.m */; };
+		C6D19A330EF80B71002B78B1 /* BrowserWebView+ChoosySafari.m in Sources */ = {isa = PBXBuildFile; fileRef = C6D19A320EF80B71002B78B1 /* BrowserWebView+ChoosySafari.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +21,11 @@
 		32DBCF630370AF2F00C91783 /* ChoosySafari_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoosySafari_Prefix.pch; sourceTree = "<group>"; };
 		8D5B49B6048680CD000E48DA /* ChoosySafari.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChoosySafari.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D5B49B7048680CD000E48DA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C6D19A2C0EF807F9002B78B1 /* ChoosySafari.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoosySafari.h; sourceTree = "<group>"; };
+		C6D19A2D0EF807F9002B78B1 /* ChoosySafari.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoosySafari.m; sourceTree = "<group>"; };
+		C6D19A300EF80B38002B78B1 /* BrowserWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserWebView.h; sourceTree = "<group>"; };
+		C6D19A310EF80B71002B78B1 /* BrowserWebView+ChoosySafari.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BrowserWebView+ChoosySafari.h"; sourceTree = "<group>"; };
+		C6D19A320EF80B71002B78B1 /* BrowserWebView+ChoosySafari.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BrowserWebView+ChoosySafari.m"; sourceTree = "<group>"; };
 		D2F7E65807B2D6F200F64583 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
@@ -67,6 +74,11 @@
 		08FB77AFFE84173DC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				C6D19A300EF80B38002B78B1 /* BrowserWebView.h */,
+				C6D19A310EF80B71002B78B1 /* BrowserWebView+ChoosySafari.h */,
+				C6D19A320EF80B71002B78B1 /* BrowserWebView+ChoosySafari.m */,
+				C6D19A2C0EF807F9002B78B1 /* ChoosySafari.h */,
+				C6D19A2D0EF807F9002B78B1 /* ChoosySafari.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -159,6 +171,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6D19A2E0EF807F9002B78B1 /* ChoosySafari.m in Sources */,
+				C6D19A330EF80B71002B78B1 /* BrowserWebView+ChoosySafari.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,6 +202,10 @@
 				GCC_PREFIX_HEADER = ChoosySafari_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-undefined",
+					dynamic_lookup,
+				);
 				PRODUCT_NAME = ChoosySafari;
 				WRAPPER_EXTENSION = bundle;
 				ZERO_LINK = YES;
@@ -203,6 +221,10 @@
 				GCC_PREFIX_HEADER = ChoosySafari_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				OTHER_LDFLAGS = (
+					"-undefined",
+					dynamic_lookup,
+				);
 				PRODUCT_NAME = ChoosySafari;
 				WRAPPER_EXTENSION = bundle;
 			};
