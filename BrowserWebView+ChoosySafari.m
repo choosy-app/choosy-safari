@@ -10,7 +10,7 @@
 #import "ChoosySafari.h"
 
 @interface BrowserWebView (DummyReplacedMethods)
-- (id)_original_webView:(id)webview contextMenuItemsForElement:(id)element defaultMenuItems:(id)items;
+- (NSArray*)_original_webView:(id)webview contextMenuItemsForElement:(NSDictionary*)element defaultMenuItems:(NSArray*)items;
 @end
 
 @implementation BrowserWebView (ChoosySafari)
@@ -21,10 +21,36 @@
 	[ChoosySafari renameSelector:@selector(_new_webView:contextMenuItemsForElement:defaultMenuItems:) toSelector:@selector(webView:contextMenuItemsForElement:defaultMenuItems:) onClass:[self class]];
 }
 
-- (id)_new_webView:(id)webview contextMenuItemsForElement:(id)element defaultMenuItems:(id)items;
+- (void)choosyMenuItemClicked:(id)sender
 {
-	NSLog(@"++++++++++++++ Context menu items for element: %@", element);
-	return [self _original_webView:webview contextMenuItemsForElement:element defaultMenuItems:items];
+	NSString *link = [sender representedObject];
+	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"x-choosy://prompt.all/%@", link]]];
+}
+
+- (NSArray*)_new_webView:(id)webview contextMenuItemsForElement:(NSDictionary*)element defaultMenuItems:(NSArray*)defaultItems;
+{	
+	NSArray *items = [self _original_webView:webview contextMenuItemsForElement:element defaultMenuItems:defaultItems];
+
+	if([[element objectForKey:@"WebElementLinkIsLive"] boolValue])
+	{
+		//NSLog(@"++++++++++++++ Found a link: %@", [element objectForKey:@"WebElementLinkURL"]);
+		//NSLog(@"Items collection is a %@ ... %@", [items class], items);
+		
+		NSMenuItem *choosyMenuItem = [[NSMenuItem alloc] initWithTitle:@"Open Link in Choosy" action:@selector(choosyMenuItemClicked:) keyEquivalent:@""];
+		[choosyMenuItem setRepresentedObject:[element objectForKey:@"WebElementLinkURL"]];
+		[choosyMenuItem setTarget:self];
+		
+		NSMutableArray *updatedItems = [items mutableCopy];
+		
+		[updatedItems insertObject:choosyMenuItem atIndex:2];
+		
+		items = [NSArray arrayWithArray:updatedItems];
+		
+		[choosyMenuItem release], choosyMenuItem = nil;
+		[updatedItems release], updatedItems = nil;
+	}
+	
+	return items;
 }
 
 @end

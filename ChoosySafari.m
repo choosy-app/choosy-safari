@@ -16,7 +16,6 @@
 + (void)load
 {
 	[BrowserWebView initChoosySafari];
-	NSLog(@"++++++++++ Choosy Safari loaded");
 }
 
 + (BOOL)renameSelector:(SEL)originalSelector toSelector:(SEL)newSelector onClass:(Class)class
