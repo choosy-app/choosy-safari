@@ -11,6 +11,7 @@
 
 @interface BrowserWebView (DummyReplacedMethods)
 - (NSArray*)_original_webView:(id)webview contextMenuItemsForElement:(NSDictionary*)element defaultMenuItems:(NSArray*)items;
+- (void)_original_webView:(WebView *)sender decidePolicyForNavigationAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request frame:(WebFrame *)frame decisionListener:(id < WebPolicyDecisionListener >)listener;
 @end
 
 @implementation BrowserWebView (ChoosySafari)
@@ -19,6 +20,24 @@
 {
 	[ChoosySafari renameSelector:@selector(webView:contextMenuItemsForElement:defaultMenuItems:) toSelector:@selector(_original_webView:contextMenuItemsForElement:defaultMenuItems:) onClass:[self class]];
 	[ChoosySafari renameSelector:@selector(_new_webView:contextMenuItemsForElement:defaultMenuItems:) toSelector:@selector(webView:contextMenuItemsForElement:defaultMenuItems:) onClass:[self class]];
+	
+	[ChoosySafari renameSelector:@selector(webView:decidePolicyForNavigationAction:request:frame:decisionListener:) toSelector:@selector(_original_webView:decidePolicyForNavigationAction:request:frame:decisionListener:) onClass:[self class]];
+	[ChoosySafari renameSelector:@selector(_new_webView:decidePolicyForNavigationAction:request:frame:decisionListener:) toSelector:@selector(webView:decidePolicyForNavigationAction:request:frame:decisionListener:) onClass:[self class]];
+}
+
+- (void)_new_webView:(WebView *)sender decidePolicyForNavigationAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request frame:(WebFrame *)frame decisionListener:(id < WebPolicyDecisionListener >)listener
+{
+	//NSLog(@"Decide policy for navigation action: %@", actionInformation);
+	//NSLog(@"Request: %@", request);
+	
+	if([[actionInformation valueForKey:@"WebActionModifierFlagsKey"] intValue] == 131072)
+	{
+		NSString *choosyURL = [NSString stringWithFormat:@"x-choosy://prompt.all/%@", [actionInformation valueForKey:@"WebActionOriginalURLKey"]];
+		[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:choosyURL]];
+		return;
+	}
+
+	[self _original_webView:sender decidePolicyForNavigationAction:actionInformation request:request frame:frame decisionListener:listener];
 }
 
 - (void)choosyMenuItemClicked:(id)sender
@@ -33,9 +52,6 @@
 
 	if([[element objectForKey:@"WebElementLinkIsLive"] boolValue])
 	{
-		//NSLog(@"++++++++++++++ Found a link: %@", [element objectForKey:@"WebElementLinkURL"]);
-		//NSLog(@"Items collection is a %@ ... %@", [items class], items);
-		
 		NSMenuItem *choosyMenuItem = [[NSMenuItem alloc] initWithTitle:@"Open Link in Choosy" action:@selector(choosyMenuItemClicked:) keyEquivalent:@""];
 		[choosyMenuItem setRepresentedObject:[element objectForKey:@"WebElementLinkURL"]];
 		[choosyMenuItem setTarget:self];

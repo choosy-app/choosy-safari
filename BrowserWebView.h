@@ -6,5 +6,9 @@
 //  Copyright 2008 George Brocklehurst. Some rights reserved (see accompanying LICENSE file for details).
 //
 
+@class WebView;
+@class WebFrame;
+@protocol WebPolicyDecisionListener;
+
 @interface BrowserWebView : NSObject
 @end

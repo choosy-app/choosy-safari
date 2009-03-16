@@ -10,18 +10,18 @@
 		<string>6.0</string>
 		<key>CFBundlePackageType</key>
 		<string>dSYM</string>
-		<key>CFBundleShortVersionString</key>
-		<string>1.0</string>
 		<key>CFBundleSignature</key>
 		<string>????</string>
-		<key>CFBundleVersion</key>
+		<key>CFBundleShortVersionString</key>
 		<string>1.0</string>
+		<key>CFBundleVersion</key>
+		<string>1</string>
 		<key>dSYM_UUID</key>
 		<dict>
 			<key>ppc</key>
-			<string>22 dc 50 5f 45 e4 5a 3d  5e 5b 23 0b c3 74 37 49</string>
+			<string>C1CB7A1B-ACD3-ACCB-C723-FE7FBD68B231</string>
 			<key>i386</key>
-			<string>bc b2 92 d4 d3 c0 57 93  0e ee 38 91 c3 92 74 37</string>
+			<string>B48F6A5A-E682-CEE8-0E0B-7472F1027E00</string>
 		</dict>
 	</dict>
 </plist>
