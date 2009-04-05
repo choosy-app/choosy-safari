@@ -9,6 +9,8 @@
 #import <objc/objc-class.h>
 #import "ChoosySafari.h"
 #import "BrowserWebView+ChoosySafari.h"
+#import "WBPreferences.h"
+#import "ChoosySafariSettings.h"
 
 
 @implementation ChoosySafari
@@ -16,6 +18,8 @@
 + (void)load
 {
 	[BrowserWebView initChoosySafari];
+	
+	[[WBPreferences sharedPreferences] addPreferenceNamed:@"Choosy" owner:[ChoosySafariSettings sharedInstance]];
 }
 
 + (BOOL)renameSelector:(SEL)originalSelector toSelector:(SEL)newSelector onClass:(Class)class
