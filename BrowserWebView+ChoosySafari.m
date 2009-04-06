@@ -8,6 +8,7 @@
 
 #import "BrowserWebView+ChoosySafari.h"
 #import "ChoosySafari.h"
+#import "ChoosySafariSettings.h"
 
 @interface BrowserWebView (DummyReplacedMethods)
 - (NSArray*)_original_webView:(id)webview contextMenuItemsForElement:(NSDictionary*)element defaultMenuItems:(NSArray*)items;
@@ -30,11 +31,32 @@
 	//NSLog(@"Decide policy for navigation action: %@", actionInformation);
 	//NSLog(@"Request: %@", request);
 	
-	if([[actionInformation valueForKey:@"WebActionModifierFlagsKey"] intValue] == 131072)
+	ChoosyModifierKey choosyModKey = [[NSUserDefaults standardUserDefaults] integerForKey:@"ChoosyModifierKey"];
+	
+	if(choosyModKey != ChoosyModifierKeyNone)
 	{
-		NSString *choosyURL = [NSString stringWithFormat:@"x-choosy://prompt.all/%@", [actionInformation valueForKey:@"WebActionOriginalURLKey"]];
-		[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:choosyURL]];
-		return;
+		int choosyModKeyCode;
+		switch(choosyModKey)
+		{
+			case ChoosyModifierKeyShift:
+				choosyModKeyCode = 131072;
+				break;
+				
+			case ChoosyModifierKeyCommand:
+				choosyModKeyCode = 1048576;
+				break;
+				
+			case ChoosyModifierKeyOption:
+				choosyModKeyCode = 524288;
+				break;
+		}
+		
+		if([[actionInformation valueForKey:@"WebActionModifierFlagsKey"] intValue] == choosyModKeyCode)
+		{
+			NSString *choosyURL = [NSString stringWithFormat:@"x-choosy://prompt.all/%@", [actionInformation valueForKey:@"WebActionOriginalURLKey"]];
+			[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:choosyURL]];
+			return;
+		}
 	}
 
 	[self _original_webView:sender decidePolicyForNavigationAction:actionInformation request:request frame:frame decisionListener:listener];

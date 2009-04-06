@@ -28,26 +28,39 @@
 	return @"ChoosySafariSettings";
 }
 
+- (IBAction)modifierKeyChanged:(id)sender
+{
+	[self willChangeValueForKey:@"modifierKeyInformation"];
+	[self didChangeValueForKey:@"modifierKeyInformation"];
+}
+
+- (NSString*)modifierKeyInformation
+{
+	switch([modifierKeyPopup selectedTag])
+	{
+		case ChoosyModifierKeyNone:
+			return @"Links will always open in Safari, even if a modifier key is pressed.";
+			
+		case ChoosyModifierKeyShift:
+			return @"Hold the shift key when clicking on a link to open it in Choosy.";
+			
+		case ChoosyModifierKeyCommand:
+			return @"Hold the command key when clicking on a link to open it in Choosy. Note: This will replace Safari's default functionality for command clicking on a link.";
+			
+		case ChoosyModifierKeyOption:
+			return @"Hold the option key when clicking on a link to open it in Choosy. Note: This will replace Safari's default functionality for option clicking on a link.";
+	}
+	
+	return nil;
+}
+
 /**
  * Called when switching preference panels.
  */
 - (void)willBeDisplayed
 {
-}
-
-/**
- * Called when window closes or "save" button is clicked.
- */
-- (void)saveChanges
-{
-}
-
-/**
- * Not sure how useful this is, so far always seems to return YES.
- */
-- (BOOL)hasChangesPending
-{
-	return TRUE;
+	[self willChangeValueForKey:@"modifierKeyInformation"];
+	[self didChangeValueForKey:@"modifierKeyInformation"];
 }
 
 /**

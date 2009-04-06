@@ -8,6 +8,14 @@
 
 #import <Cocoa/Cocoa.h>
 
+typedef enum
+{
+	ChoosyModifierKeyNone = 0,
+	ChoosyModifierKeyShift = 1,
+	ChoosyModifierKeyCommand = 2,
+	ChoosyModifierKeyOption = 3
+} ChoosyModifierKey;
+
 /* From CocoaDev: http://www.cocoadev.com/index.pl?NSPreferences */
 @interface NSPreferencesModule : NSObject
 {
@@ -42,7 +50,10 @@
 
 @interface ChoosySafariSettings : NSPreferencesModule
 {
-
+	IBOutlet NSPopUpButton *modifierKeyPopup;
 }
+
+- (IBAction)modifierKeyChanged:(id)sender;
+- (NSString*)modifierKeyInformation;
 
 @end

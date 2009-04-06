@@ -130,6 +130,7 @@
 												<reference key="NSOnImage" ref="520952175"/>
 												<reference key="NSMixedImage" ref="659797426"/>
 												<string key="NSAction">_popUpItemAction:</string>
+												<int key="NSTag">1</int>
 												<reference key="NSTarget" ref="556878560"/>
 											</object>
 											<object class="NSMenuItem" id="660900780">
@@ -141,6 +142,7 @@
 												<reference key="NSOnImage" ref="520952175"/>
 												<reference key="NSMixedImage" ref="659797426"/>
 												<string key="NSAction">_popUpItemAction:</string>
+												<int key="NSTag">2</int>
 												<reference key="NSTarget" ref="556878560"/>
 											</object>
 											<object class="NSMenuItem" id="162609865">
@@ -152,6 +154,7 @@
 												<reference key="NSOnImage" ref="520952175"/>
 												<reference key="NSMixedImage" ref="659797426"/>
 												<string key="NSAction">_popUpItemAction:</string>
+												<int key="NSTag">3</int>
 												<reference key="NSTarget" ref="556878560"/>
 											</object>
 										</object>
@@ -165,13 +168,13 @@
 							<object class="NSTextField" id="502413929">
 								<reference key="NSNextResponder" ref="84214415"/>
 								<int key="NSvFlags">268</int>
-								<string key="NSFrame">{{175, 25}, {298, 34}}</string>
+								<string key="NSFrame">{{175, 15}, {298, 44}}</string>
 								<reference key="NSSuperview" ref="84214415"/>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSTextFieldCell" key="NSCell" id="353637596">
 									<int key="NSCellFlags">67239424</int>
 									<int key="NSCellFlags2">272629760</int>
-									<string key="NSContents">Links will always open in Safari, even if a modifier key is pressed</string>
+									<string key="NSContents">Links will always open in Safari, even if a modifier key is pressed.</string>
 									<object class="NSFont" key="NSSupport">
 										<string key="NSName">LucidaGrande</string>
 										<double key="NSSize">1.100000e+01</double>
@@ -219,6 +222,13 @@
 				<int key="NSTitlePosition">0</int>
 				<bool key="NSTransparent">NO</bool>
 			</object>
+			<object class="NSUserDefaultsController" id="421677825">
+				<object class="NSMutableArray" key="NSDeclaredKeys">
+					<bool key="EncodedWithXMLCoder">YES</bool>
+					<string>ChoosyModifierKey</string>
+				</object>
+				<bool key="NSSharedInstance">YES</bool>
+			</object>
 		</object>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
 			<object class="NSMutableArray" key="connectionRecords">
@@ -230,6 +240,54 @@
 						<reference key="destination" ref="857629309"/>
 					</object>
 					<int key="connectionID">6</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">selectedIndex: values.ChoosyModifierKey</string>
+						<reference key="source" ref="735489236"/>
+						<reference key="destination" ref="421677825"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="735489236"/>
+							<reference key="NSDestination" ref="421677825"/>
+							<string key="NSLabel">selectedIndex: values.ChoosyModifierKey</string>
+							<string key="NSBinding">selectedIndex</string>
+							<string key="NSKeyPath">values.ChoosyModifierKey</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">27</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">modifierKeyChanged:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="735489236"/>
+					</object>
+					<int key="connectionID">28</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">modifierKeyPopup</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="735489236"/>
+					</object>
+					<int key="connectionID">29</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: modifierKeyInformation</string>
+						<reference key="source" ref="502413929"/>
+						<reference key="destination" ref="1001"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="502413929"/>
+							<reference key="NSDestination" ref="1001"/>
+							<string key="NSLabel">value: modifierKeyInformation</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">modifierKeyInformation</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">31</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -350,6 +408,11 @@
 						<reference key="object" ref="353637596"/>
 						<reference key="parent" ref="502413929"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">25</int>
+						<reference key="object" ref="421677825"/>
+						<reference key="parent" ref="1002"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -383,7 +446,7 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{532, 809}, {253, 83}}</string>
+					<string>{{513, 809}, {253, 83}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -415,7 +478,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">23</int>
+			<int key="maxID">31</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -423,6 +486,14 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">ChoosySafariSettings</string>
 					<string key="superclassName">NSPreferencesModule</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">modifierKeyChanged:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">modifierKeyPopup</string>
+						<string key="NS.object.0">NSPopUpButton</string>
+					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier" id="408809795">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">ChoosySafariSettings.h</string>
