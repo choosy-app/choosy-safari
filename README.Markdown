@@ -1,5 +1,9 @@
 # ChoosySafari
 
+**This project is no longer maintained:** Safari has long since added proper extension support, and Choosy now ships with a native Safari App Extension.
+
+---
+
 A SIMBL plugin for Safari that adds an "Open Link with Choosy" option to the context menu for links.
 
 ## Usage:
